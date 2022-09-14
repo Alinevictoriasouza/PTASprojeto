@@ -36,6 +36,19 @@ app.get('/', async function(req, res){
   res.render("home")
 })
 
+app.get('/listar', async function(req, res){
+  const usuario_ = await usuario.findAll()
+  res.json(usuario_);
+})
+
+app.get('/cadastrar', async function(req, res){
+  res.render("cadastrar");
+})
+
+app.post('/cadastra', async function(req, res){
+  const usuario_ = await usuario.create(req.body)
+  res.json(usuario_)
+})
 
 app.post('/logar', (req, res) => {
   if(req.body.user === 'aline' && req.body.password === 'princesadiana'){
