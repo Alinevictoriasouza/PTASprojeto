@@ -8,13 +8,17 @@
   <title>Document</title>
 </head>
 <body>
+  <img class="img1" src="image 1.png">
+  <img class="img2" src="logo.png">
+  <div class="formulario">
   <form action="/logar" method="post">
-    <label for="user"></label>
-    <input type="text" name="user" id="user">
-    <label for="password"></label>
-    <input type="text" name="password" id="password">
+    <div class="form"><label for="user"></label>Usuario:</div>
+    <input type="text" name="user" id="user" style="width: 50%; border-radius: 10px; margin-left: 25%; height: 20px;"><br>
+    <div class="form"><label for="password"></label>Senha:</div>
+    <input type="text" name="password" id="password" style="width: 50%; border-radius: 10px; margin-left: 25%; height: 20px;">
 
-    <input type="submit" value="Logar">
+    <input class="button" type="submit" value="Logar">
   </form>
+  </div>
 </body>
 </html>
