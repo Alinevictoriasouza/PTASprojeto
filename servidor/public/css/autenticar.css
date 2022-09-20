@@ -1,0 +1,23 @@
+.button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2%;
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #925336;
+  padding: 7px 40px;
+  border-width: 1px;
+}
+
+.deslogar {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2%;
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #925336;
+  padding: 7px 40px;
+  border-width: 1px;
+}
