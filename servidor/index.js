@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use(cookieParser());
@@ -28,30 +28,31 @@ app.use(
   }).unless({ path: ["/sobre", "/autenticar", "/logar", "/deslogar"] })
 );
 
-app.get('/autenticar', async function(req, res){
+app.get('/autenticar', async function (req, res) {
   res.render('autenticar');
 })
 
-app.get('/', async function(req, res){
+app.get('/', async function (req, res) {
   res.render("home")
 })
 
-app.get('/listar', async function(req, res){
+app.get('/listar', async function (req, res) {
   const usuarios = await usuario.findAll()
   res.render("listar", { usuarios });
 })
 
-app.get('/cadastrar', async function(req, res){
+app.get('/cadastrar', async function (req, res) {
   res.render("cadastrar");
 })
 
-app.post('/cadastra', async function(req, res){
+app.post('/cadastra', async function (req, res) {
   const usuario_ = await usuario.create(req.body)
   res.json(usuario_)
 })
 
-app.post('/logar', (req, res) => {
-  if(req.body.user === 'aline' && req.body.password === 'princesadiana'){
+app.post('/logar', async (req, res) => {
+  const usuarios = await usuario.findOne({ where: { usuario: req.body.usuario } })
+  if (req.body.usuario === usuarios.usuario && req.body.senha === usuarios.senha) {
     const id = 1;
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3600 // expires in 5min
@@ -61,19 +62,19 @@ app.post('/logar', (req, res) => {
     return res.json({ auth: true, token: token });
   }
 
-  res.status(500).json({message: 'Login inválido!'});
+  res.status(500).json({ message: 'Login inválido!' });
 })
 
-app.post('/deslogar', function(req, res) {
+app.post('/deslogar', function (req, res) {
   res.cookie('token', null, { httpOnly: true });
-  res.json({deslogado: true})
+  res.json({ deslogado: true })
 })
 
-app.get('/sobre', function(req, res) {
+app.get('/sobre', function (req, res) {
   res.cookie('token', null, { httpOnly: true });
-  res.json({sobre: true})
+  res.json({ sobre: true })
 })
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log('App de Exemplo escutando na porta 3000!')
 });
